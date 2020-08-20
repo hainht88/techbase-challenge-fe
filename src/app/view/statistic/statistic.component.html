@@ -1,0 +1,90 @@
+<main>
+  <h1>Reported Cases and Deaths by Country</h1>
+  <p *ngIf="global">
+    The <strong mat-primary>coronavirus</strong> COVID-19 is affecting
+    <strong>{{ countries.length }} countries</strong>. with
+    <strong>{{ global.NewConfirmed }} new confirmed</strong>,
+    <strong>{{ global.NewDeaths }} new deaths</strong> and
+    <strong>{{ global.NewRecovered }} new recovered</strong> today
+    <strong>{{ date | date }}</strong
+    >.
+  </p>
+  <strong>The day is reset after midnight GMT+0</strong>. The list of countries
+  and territories and their continental regional classification is based on the
+  <a href="https://unstats.un.org/unsd/methodology/m49/"
+    >United Nations Geoscheme</a
+  >
+  <mat-divider></mat-divider>
+
+  <mat-form-field>
+    <mat-label>Search by</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. Mia"
+      #input
+    />
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- Progress Column -->
+      <ng-container matColumnDef="Country">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-raised-button [ngClass]="['country-button']">
+            {{ row.Country }}
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Progress Column -->
+      <ng-container matColumnDef="NewConfirmed">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>New Confirmed</th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          [style.color]="calculateColor(row.NewConfirmed)"
+        >
+          {{ row.NewConfirmed }}
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="NewDeaths">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>New Deaths</th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          [style.color]="calculateColor(row.NewDeaths)"
+        >
+          {{ row.NewDeaths }}
+        </td>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="NewRecovered">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>New Recovered</th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          [style.color]="calculateColor(row.NewRecovered)"
+        >
+          {{ row.NewRecovered }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          No data matching the filter "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</main>

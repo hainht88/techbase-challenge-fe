@@ -1,0 +1,24 @@
+.container {
+    min-height: 80%;
+}
+
+.sidenav {
+    padding: 20px;
+}
+
+.sidenav-content {
+    padding: 36px;
+}
+
+a {
+    text-decoration: none;
+    color: gray;
+    &:hover {
+        color: blue;
+    }
+}
+
+.active {
+    color: blue;
+    font-weight: 500;
+}

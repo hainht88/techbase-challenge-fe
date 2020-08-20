@@ -1,0 +1,24 @@
+<mat-sidenav-container class="container" autosize>
+    <mat-sidenav class="sidenav" mode="side" [opened]="toggleSidenav()">
+        <mat-list>
+            <div mat-subheader>Pages</div>
+            <mat-list-item>
+              <mat-icon mat-list-icon>dashboard</mat-icon>
+              <a routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>article</mat-icon>
+              <a routerLink="article" routerLinkActive="active">Article</a>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <div mat-subheader>Tools</div>
+            <mat-list-item>
+              <mat-icon mat-list-icon>assessment</mat-icon>
+              <a routerLink="statistic" routerLinkActive="active">Statistics</a>
+            </mat-list-item>
+        </mat-list>
+    </mat-sidenav>
+    <div class="sidenav-content">
+        <router-outlet></router-outlet>
+    </div>
+</mat-sidenav-container>
